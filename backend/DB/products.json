@@ -1,0 +1,14 @@
+[
+  {
+    "type_id": "",
+    "name": "",
+    "price": "",
+    "image": ["", ""],
+    "details":{
+        "color":[],
+        "description":[],
+        "volume":"",
+        "year":""
+    }
+  }
+]
