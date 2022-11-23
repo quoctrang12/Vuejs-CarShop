@@ -33,6 +33,36 @@
   margin-top: 20px;
 }
 </style>
+<script>
+import OrderService from '@/services/order.service';
+import { useUserStore } from "@/stores/UserStore";
+export default {
+  data() {
+    const userStore = useUserStore();
+    return {
+      userStore,
+      data: {}
+    }
+  },
+  methods: {
+    async getData() {
+      this.data = this.userStore.user
+    },
+    async handleSubmit() {
+      try {
+        await OrderService.create({ ...this.data, nameCar: "Mercedes-Maybach S-Class" });
+        alert("Đã gửi! Hãy đợi chúng tôi liên lạc")
+      } catch (error) {
+        alert('Gửi không thành công')
+      }
+    }
+  },
+  created() {
+    this.getData();
+  }
+
+}
+</script>
 <template>
   <main>
     <div class="container-fluid mb-5 position-relative">
@@ -45,10 +75,82 @@
           <h6>Chế tác từ những bậc thầy tốc độ</h6>
           <p class="fw-bold mt-4">Giá: 11.590.000.000 <i class="fa-solid fa-dong-sign"></i></p>
           <div class="mt-5">
-            <button class="btn">
-              <i class="fa-solid fa-heart"></i>
-              Add to favorite
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#addUser">
+              Gửi yêu cầu mua hàng
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addUserLabel">Product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4 px-5">
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.name" type="text" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Họ tên</label>
+              </div>
+            </div>
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.phone" type="text" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Số điện thoại</label>
+              </div>
+            </div>
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.email" type="email" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Email</label>
+              </div>
+            </div>
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.address" type="text" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Địa chỉ</label>
+              </div>
+            </div>
+            <div>
+              <h6 class="text-primary border-primary" style="border-bottom: 1px solid ;width:fit-content">Chính sách bảo
+                vệ dữ
+                liệu</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Tôi đã đọc và đồng ý với chính sách bảo vệ dữ liệu*
+                </label>
+              </div>
+              <div class="mt-4">
+                <p class="m-0">Tôi đồng ý nhận thông tin qua</p>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                  <label class="form-check-label" for="inlineCheckbox1">SĐT</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+                  <label class="form-check-label" for="inlineCheckbox2">SMS/MMS</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+                  <label class="form-check-label" for="inlineCheckbox2">Email</label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary  rounded-0" data-bs-dismiss="modal"
+              @click="this.handleSubmit()">Xác nhận</button>
           </div>
         </div>
       </div>

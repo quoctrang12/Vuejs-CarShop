@@ -11,7 +11,7 @@
         <router-link to="/admin"><i class="fas fa-box me-3"></i>Quản lý Sản Phẩm</router-link>
       </div>
       <div class=" mb-3">
-        <router-link to="/admin/order"><i class="fas fa-file me-3"></i>Quản lý Hóa Đơn</router-link>
+        <router-link to="/admin/request"><i class="fas fa-file me-3"></i>Quản lý Yêu Cầu</router-link>
       </div>
       <div class=" mb-3">
         <router-link to="/admin/customer"><i class="fas fa-user-circle me-3"></i>Quản lý Người Dùng</router-link>

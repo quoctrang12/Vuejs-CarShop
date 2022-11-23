@@ -14,6 +14,7 @@ router
   .get(users.findAll)
 router
   .route("/:id")
-  .get(users.delete)
-
+  .delete(users.delete)
+  .put(users.update)
+  
 module.exports = router;

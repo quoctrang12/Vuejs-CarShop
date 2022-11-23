@@ -1,5 +1,6 @@
 <style scoped>
 @import "@/assets/css/detail.css";
+
 .banner-title {
   position: absolute;
   width: 100%;
@@ -8,12 +9,14 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: beige;
 }
+
 .title {
   position: relative;
   top: 100px;
   left: 100px;
   width: 300px;
 }
+
 .title h4 {
   font-size: 2em;
 }
@@ -30,6 +33,36 @@
   margin-top: 20px;
 }
 </style>
+<script>
+import OrderService from '@/services/order.service';
+import { useUserStore } from "@/stores/UserStore";
+export default {
+  data() {
+    const userStore = useUserStore();
+    return {
+      userStore,
+      data: {}
+    }
+  },
+  methods: {
+    async getData() {
+      this.data = this.userStore.user
+    },
+    async handleSubmit() {
+      try {
+        await OrderService.create({ ...this.data, nameCar: "Mercedes-Maybach S-Class"});
+        alert("Đã gửi! Hãy đợi chúng tôi liên lạc")
+      } catch (error) {
+        alert('Gửi không thành công')
+      }
+    }
+  },
+  created() {
+    this.getData();
+  }
+
+}
+</script>
 <template>
   <main>
     <div class="container-fluid mb-5 position-relative">
@@ -42,10 +75,83 @@
           <h6>Định nghĩa một tuyệt tác</h6>
           <p class="fw-bold mt-4">Giá: 8.199.000.000 <i class="fa-solid fa-dong-sign"></i></p>
           <div class="mt-5">
-            <button class="btn">
-              <i class="fa-solid fa-heart"></i>
-              Add to favorite
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#addUser">
+              Gửi yêu cầu mua hàng
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addUserLabel">Product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4 px-5">
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.name" type="text" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Họ tên</label>
+              </div>
+            </div>
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.phone" type="text" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Số điện thoại</label>
+              </div>
+            </div>
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.email" type="email" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Email</label>
+              </div>
+            </div>
+            <div class="">
+              <div class="form-floating mb-3">
+                <input v-model="this.data.address" type="text" class="form-control rounded-0" id="floatingInput"
+                  placeholder="">
+                <label for="floatingInput">Địa chỉ</label>
+              </div>
+            </div>
+            <div>
+              <h6 class="text-primary border-primary" style="border-bottom: 1px solid ;width:fit-content">Chính sách bảo
+                vệ dữ
+                liệu</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Tôi đã đọc và đồng ý với chính sách bảo vệ dữ liệu*
+                </label>
+              </div>
+              <div class="mt-4">
+                <p class="m-0">Tôi đồng ý nhận thông tin qua</p>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                  <label class="form-check-label" for="inlineCheckbox1">SĐT</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+                  <label class="form-check-label" for="inlineCheckbox2">SMS/MMS</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+                  <label class="form-check-label" for="inlineCheckbox2">Email</label>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary  rounded-0" data-bs-dismiss="modal"
+              @click="this.handleSubmit()">Xác nhận</button>
           </div>
         </div>
       </div>
@@ -63,10 +169,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div
-              class="row justify-content-end ms-auto mb-5"
-              style="width: 75%"
-            >
+            <div class="row justify-content-end ms-auto mb-5" style="width: 75%">
               <img src="@/assets/Images/Mercedes_MAYBACH/z223-1.webp" />
               <p class="img-title">
                 Thiết kế mâm xe mang dấu ấn Mercedes-Maybach độc quyền.
@@ -108,17 +211,11 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <img
-              src="@/assets/Images/Mercedes_MAYBACH/z223-5.webp"
-              style="width: 100%"
-            />
+            <img src="@/assets/Images/Mercedes_MAYBACH/z223-5.webp" style="width: 100%" />
             <p class="img-title">Vè thiết kế ngoại thất</p>
           </div>
           <div class="col-md-6">
-            <img
-              src="@/assets/Images/Mercedes_MAYBACH/z223-6.webp"
-              style="width: 100%"
-            />
+            <img src="@/assets/Images/Mercedes_MAYBACH/z223-6.webp" style="width: 100%" />
             <p class="img-title">Về thiết kế nội thất</p>
           </div>
         </div>
@@ -136,8 +233,7 @@
           <div class="col-md-7">
             <img
               src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/s-class/mercedes-maybach-z223/explore/comfort-teaser/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide/image.MQ4.0.20210823072935.jpeg"
-              style="width: 100%"
-            />
+              style="width: 100%" />
           </div>
           <div class="col-md-5">
             <p class="h4 ps-4">Tiện nghi nổi bật</p>
@@ -187,8 +283,7 @@
           <div class="col-md-7">
             <img
               src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/s-class/mercedes-maybach-z223/explore/specifications-teaser/_jcr_content/par/imagenumbercombinati/media/videoimageslide/image.MQ4.0.20210823072937.jpeg"
-              style="width: 100%"
-            />
+              style="width: 100%" />
           </div>
         </div>
       </div>

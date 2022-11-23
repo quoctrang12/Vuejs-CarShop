@@ -39,9 +39,7 @@ class ProductService {
   }
 
   async create(file, payload) {
-    console.log(file);
     const product = this.extractProductData({...payload,image:file.name});
-    console.log(product);
     const fs = require('fs');
         let folderPath = "D:\\PTUDW\\Project\\frontend\\src\\assets\\Images\\Mercedes";
         try {

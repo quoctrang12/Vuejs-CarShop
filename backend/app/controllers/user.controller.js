@@ -10,7 +10,7 @@ exports.create = async (req, res, next) => {
     return res.send(document);
   } catch (error) {
     return next(
-      new ApiError(500, "An error occurred while creating the contact")
+      new ApiError(500, "An error occurred while creating the User")
     );
   }
 };
@@ -22,7 +22,7 @@ exports.findAll = async (req, res, next) => {
     documents = await userService.find({});
   } catch (error) {
     return next(
-      new ApiError(500, "An error occurred while creating the contact")
+      new ApiError(500, "An error occurred while creating the User")
     );
   }
   return res.send(documents);
@@ -38,7 +38,7 @@ exports.login = async (req, res, next) => {
     return res.send(document);
   } catch (error) {
     return next(
-      new ApiError(500, `Error retrieving contact with id=${req.params.id}`)
+      new ApiError(500, `Error retrieving User with id=${req.params.id}`)
     );
   }
 };
@@ -47,12 +47,12 @@ exports.findOne = async (req, res, next) => {
     const userService = new UserService(MongoDB.client);
     const document = await userService.findById(req.params.id);
     if (!document) {
-      return next(new ApiError(404, "Contact not found"));
+      return next(new ApiError(404, "User not found"));
     }
     return res.send(document);
   } catch (error) {
     return next(
-      new ApiError(500, `Error retrieving contact with id=${req.params.id}`)
+      new ApiError(500, `Error retrieving User with id=${req.params.id}`)
     );
   }
 };
@@ -65,12 +65,12 @@ exports.update = async (req, res, next) => {
     const userService = new UserService(MongoDB.client);
     const document = await userService.update(req.params.id, req.body);
     if (!document) {
-      return next(new ApiError(404, "Contact not found"));
+      return next(new ApiError(404, "User not found"));
     }
-    return res.send({ message: "Contact was updated successfully" });
+    return res.send({ message: "User was updated successfully" });
   } catch (error) {
     return next(
-      new ApiError(500, `Error updating contact with id=${req.params.id}`)
+      new ApiError(500, `Error updating User with id=${req.params.id}`)
     );
   }
 };
@@ -79,12 +79,12 @@ exports.delete = async (req, res, next) => {
     const userService = new UserService(MongoDB.client);
     const document = await userService.delete(req.params.id);
     if (!document) {
-      return next(new ApiError(404, "Contact not found"));
+      return next(new ApiError(404, "User not found"));
     }
-    return res.send({ message: "Contact was deleted successfully" });
+    return res.send({ message: "User was deleted successfully" });
   } catch (error) {
     return next(
-      new ApiError(500, `Could not delete contact with id=${req.params.id}`)
+      new ApiError(500, `Could not delete User with id=${req.params.id}`)
     );
   }
 };
@@ -93,11 +93,11 @@ exports.deleteAll = async (_req, res, next) => {
     const userService = new UserService(MongoDB.client);
     const deletedCount = await userService.deleteAll();
     return res.send({
-      message: `${deletedCount} contacts were deleted successfully`,
+      message: `${deletedCount} Users were deleted successfully`,
     });
   } catch (error) {
     return next(
-      new ApiError(500, "An error while retrieving favorite contacts")
+      new ApiError(500, "An error while retrieving favorite Users")
     );
   }
 };

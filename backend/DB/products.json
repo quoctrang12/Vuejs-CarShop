@@ -1,6 +1,72 @@
 [
   {
     "type_id": "sedan",
+    "name": "Mercedes-Maybach S-Class",
+    "price": 8199000000,
+    "image": "iris-S-Class.webp",
+    "details": {
+      "loaiSo": "Số tự động",
+      "fuel": "Xăng",
+      "color": { "inSide": "Đen", "outSide": "Đen" },
+      "volume": "463 kW (630 mã lực)",
+      "soXiLanh": 4,
+      "chieuRong": 1820,
+      "weight": 1650,
+      "tocDo": 246,
+      "soCho": 5,
+      "dungTich": 1496,
+      "chieuDai": 4751,
+      "chieuCao": 1437,
+      "trongLuong": 2265,
+      "soCua": 4
+    }
+  },
+  {
+    "type_id": "offRoader",
+    "name": "Mercedes G-Class",
+    "price": 10950000000,
+    "image": "iris-G-Class.webp",
+    "details": {
+      "loaiSo": "Số tự động",
+      "fuel": "Xăng",
+      "color": { "inSide": "Đen", "outSide": "Đen" },
+      "volume": "463 kW (630 mã lực)",
+      "soXiLanh": 4,
+      "chieuRong": 1820,
+      "weight": 1650,
+      "tocDo": 246,
+      "soCho": 5,
+      "dungTich": 1496,
+      "chieuDai": 4751,
+      "chieuCao": 1437,
+      "trongLuong": 2265,
+      "soCua": 4
+    }
+  },
+  {
+    "type_id": "compact",
+    "name": "Mercedes AMG GT",
+    "price": 11590000000,
+    "image": "iris-AMG-GT.webp",
+    "details": {
+      "loaiSo": "Số tự động",
+      "fuel": "Xăng",
+      "color": { "inSide": "Đen", "outSide": "Đen" },
+      "volume": "500 kW (690 mã lực)",
+      "soXiLanh": 4,
+      "chieuRong": 1820,
+      "weight": 1650,
+      "tocDo": 246,
+      "soCho": 5,
+      "dungTich": 1496,
+      "chieuDai": 4751,
+      "chieuCao": 1437,
+      "trongLuong": 2265,
+      "soCua": 4
+    }
+  },
+  {
+    "type_id": "sedan",
     "name": "C 200 Avantgarde",
     "price": 1669000000,
     "image": "iris-C200.webp",
@@ -25,7 +91,7 @@
     "type_id": "sedan",
     "name": "C 200 Avantgarde Plus",
     "price": 1789000000,
-    "image": "iris-C200-plus.jpg",
+    "image": "iris-C200-plus.png",
     "details": {
       "loaiSo": "Số tự động",
       "fuel": "Xăng",
@@ -47,7 +113,7 @@
     "type_id": "sedan",
     "name": "C 300 AMG",
     "price": 2089000000,
-    "image": "iris-C300-AMG.jpg",
+    "image": "iris-C300-AMG.png",
     "details": {
       "loaiSo": "Số tự động",
       "fuel": "Xăng",

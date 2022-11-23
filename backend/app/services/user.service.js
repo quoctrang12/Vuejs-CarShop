@@ -54,7 +54,7 @@ class UserService {
   }}
 
   async find(filter) {
-    const cursor = await this.User.find(filter);
+    var cursor = await this.User.find(filter);
     return await cursor.toArray();
   }
 
@@ -72,7 +72,7 @@ class UserService {
 
   async update(id, payload) {
     const filter = {
-      _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+      _id: id,
     };
     const update = this.extractUserData(payload);
     const result = await this.User.findOneAndUpdate(

@@ -22,13 +22,13 @@ button {
 </style>
 <template>
   <main class="">
-    <div class="container-fluid position-relative">
-      <div class="row">
+    <div class="container-fluid p-0 position-relative">
+      <div class="row m-0">
         <img
           src="https://www.mercedes-benz.com/en/_jcr_content/root/stage/parsys/stageitem/image/MQ6-0-image-20221017082646/22C0291_001_Stage_3400x1440.jpeg"
           alt="" class="p-0" />
       </div>
-      <div class="title-banner row">
+      <div class="title-banner row m-0">
         <div class="title">
           <h4>Digital World Premiere</h4>
           <h2>EQE SUV</h2>
@@ -107,13 +107,13 @@ button {
         </div>
       </div>
     </div>
-    <div class="container-fluid position-relative">
-      <div class="row">
+    <div class="container-fluid p-0 position-relative">
+      <div class="row m-0">
         <img
           src="https://www.mercedes-benz.com/en/_jcr_content/root/stage/parsys/stageitem_1441300015/image/MQ6-0-image-20220722084958/mercedes-benz-home-stage-project-maybach-3840x2160-08-2022.jpeg"
           alt="" class="p-0" />
       </div>
-      <div class="title-banner row">
+      <div class="title-banner row m-0">
         <div class="title" style="top: 250px">
           <h2>Project MAYBACH</h2>
           <button class="bg-white py-2 px-4 fw-bold">

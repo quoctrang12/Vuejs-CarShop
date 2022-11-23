@@ -4,7 +4,8 @@ const fileUpload = require('express-fileupload');
 const ApiError = require("./app/api-error");
 const productsRouter= require("./app/routes/product.route");
 const usersRouter= require("./app/routes/user.route");
-
+const ordersRouter= require("./app/routes/order.route");
+require('dotenv').config()
 const app = express();
 
 app.use(cors());
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(fileUpload());
 app.use('/api/products',productsRouter);
 app.use('/api/users',usersRouter);
-
+app.use('/api/orders',ordersRouter);
 app.use((req,res,next)=>{
     return next(new ApiError(404, "Resource not found"));
 })

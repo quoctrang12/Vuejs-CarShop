@@ -21,7 +21,7 @@ export default {
           <AppHeader />
           <router-view />
           <div class="container-fluid footer-admin text-center m-0">
-            <p class="py-3 m-0">Copyright © Designed By LUXEYE</p>
+            <p class="py-3 m-0">Copyright © Designed By NQT</p>
           </div>
         </div>
       </div>

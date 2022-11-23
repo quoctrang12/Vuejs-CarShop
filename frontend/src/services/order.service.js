@@ -1,27 +1,24 @@
 import createApiClient from './api.service';
 
-class UserService {
-    constructor(baseUrl = '/api/users'){
+class OrderService {
+    constructor(baseUrl = '/api/orders'){
         this.api = createApiClient(baseUrl);
     }
 
-    async login(data){
-        return (await this.api.post('/login', data)).data;
-    } 
-
-    async create(data) {
-        return (await this.api.post('/signup', data)).data;
-    }
-
-    async getAll() {
+    async getAll(){
         return (await this.api.get('/')).data;
     }
+
+    async create(data) {
+        return (await this.api.post(`/`, data)).data;
+    }
+
     async deleteAll() {
         return (await this.api.delete('/')).data;
     }
 
-    async get(id) {
-        return (await this.api.get(`/${id}`)).data;
+    async get(phone) {
+        return (await this.api.get(`/${phone}`)).data;
     }
 
     async update(id, data) {
@@ -34,4 +31,4 @@ class UserService {
 
 }
 
-export default new UserService();
+export default new OrderService();

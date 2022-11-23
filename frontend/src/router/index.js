@@ -20,9 +20,9 @@ const routes = [
         component: () => import("@/views/products/ProductDetail.vue"),
       },
       {
-        path: "cart",
-        name: "Cart",
-        component: () => import("@/views/cart/CartPage.vue"),
+        path: "order",
+        name: "Order",
+        component: () => import("@/views/order/OrderPage.vue"),
       },
       {
         path: "about",
@@ -70,9 +70,9 @@ const routes = [
         component: () => import("@/views/admin/CustomerManager.vue"),
       },
       {
-        path: "order",
+        path: "request",
         // name: "orderManager",
-        component: () => import("@/views/admin/OrderManager.vue"),
+        component: () => import("@/views/admin/RequestManager.vue"),
       },
     ],
   },

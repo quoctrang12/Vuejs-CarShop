@@ -37,8 +37,6 @@
                 placeholder="Enter password"
                 v-model="this.data.account.password"
               />
-              <i class="fas fa-eye eye_open"></i>
-              <i class="fas fa-eye-slash eye_close"></i>
             </div>
 
             <div class="form-group mb-3 passw1">
@@ -50,8 +48,6 @@
                 placeholder="Confirm password"
                 v-model="this.confirmPass"
               />
-              <i class="fas fa-eye ceye_open"></i>
-              <i class="fas fa-eye-slash ceye_close"></i>
             </div>
             <div class="mb-3">
               <label>
