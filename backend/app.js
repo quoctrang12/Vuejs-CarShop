@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require('express-fileupload');
 const ApiError = require("./app/api-error");
 const productsRouter= require("./app/routes/product.route");
 const usersRouter= require("./app/routes/user.route");
@@ -8,7 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(fileUpload());
 app.use('/api/products',productsRouter);
 app.use('/api/users',usersRouter);
 

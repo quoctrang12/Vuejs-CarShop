@@ -1,197 +1,184 @@
 <style scoped>
 @import "@/assets/css/detail.css";
+
+main {
+    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+}
+
 .banner-title {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: beige;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    color: black;
 }
+
 .title {
-  position: relative;
-  top: 100px;
-  left: 100px;
-  width: 300px;
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    padding: 40px;
+    width: 23em;
+    height: fit-content;
+    background-color: white;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.349);
 }
+
+.car {
+    position: absolute;
+    width: 65%;
+    height: fit-content;
+    font-size: .9em;
+}
+
 .title h4 {
-  font-size: 2em;
+    font-size: 1.8em;
 }
 
 .btn {
-  padding: 10px 20px;
-  background-color: rgba(0, 0, 0, 0.815);
-  color: aliceblue;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.815);
+    color: aliceblue;
+    border-radius: 0;
 }
 
 .img-title {
-  font-size: 1em;
-  font-weight: 600;
-  margin-top: 20px;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.background-image {
+    background-image: url('@/assets/Images/background_details.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.icon {
+    filter: invert(47%) sepia(11%) saturate(332%) hue-rotate(167deg) brightness(93%) contrast(91%);
+}
+.detail div{
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin-left: 20px;
+}
+.detail p{
+    margin: 0;
+    font-weight: 600;
 }
 </style>
+<script>
+import ProductService from '@/services/product.service';
+export default {
+  data(){
+    return{
+      product: {}
+    }
+  },
+  methods:{
+    async getData(){
+      this.product = await ProductService.get(this.$route.params.id);
+    }
+  },
+  created(){
+    this.getData();
+  }
+
+}
+</script>
 <template>
-  <main>
-    <div class="container-fluid mb-5 position-relative">
-      <div class="row">
-        <img src="@/assets/Images/Mercedes_MAYBACH/z223.webp" class="p-0" />
-      </div>
-      <div class="banner-title row">
-        <div class="title">
-          <h4>Mercedes-Maybach S-Class</h4>
-          <h6>Định nghĩa một tuyệt tác</h6>
-          <p class="fw-bold mt-4">Giá: 8.199.000.000 <i class="fa-solid fa-dong-sign"></i></p>
-          <div class="mt-5">
-            <button class="btn">
-              <i class="fa-solid fa-heart"></i>
-              Add to favorite
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="mb-5">
-          <p>Điểm nổi bật</p>
-          <h5>Vượt tầm kiệt tác</h5>
-          Hoàn mỹ trong việc lựa chọn chất liệu đến sự tinh tế của từng đường
-          chỉ may tương phản đầy ấn tượng, <br />Mercedes-Maybach S-Class mới
-          tái thiết chuẩn mực sang trọng.<br />
-          Trợ lý cá nhân MBUX với những công nghệ ưu việt đánh dấu khởi nguyên
-          của một trải nghiệm lái xe bậc nhất.
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div
-              class="row justify-content-end ms-auto mb-5"
-              style="width: 75%"
-            >
-              <img src="@/assets/Images/Mercedes_MAYBACH/z223-1.webp" />
-              <p class="img-title">
-                Thiết kế mâm xe mang dấu ấn Mercedes-Maybach độc quyền.
-              </p>
+    <main>
+        <div class="container-fluid mb-5 position-relative background-image" style="height:80vh">
+            <div class="banner-title row">
+                <div class="car">
+                    <img :src="'../src/assets/Images/Mercedes/'+this.product.image" width="850" />
+                    <p class="ms-5 text-secondary"><i class="fa-solid fa-circle-info"></i> Tất cả các hình ảnh và thông số hiển thị chỉ mang tính minh hoạ, mẫu tham khảo. Sản phẩm được
+                        Khách hàng lựa chọn có thể có hình ảnh và thông số khác với các hình ảnh hiện thị tùy thuộc vào
+                        Hợp đồng mua bán xe với Khách hàng. XIN LƯU Ý kiểm tra kỹ đề xuất gửi Khách Hàng mà Nhà Phân
+                        Phối cung cấp để đảm tính chính xác các trang thiết bị và cấu hình xe.</p>
+                </div>
             </div>
-            <div class="row mb-5">
-              <img src="@/assets/Images/Mercedes_MAYBACH/z223-2.webp" />
-              <p class="img-title">
-                Ốp gỗ nội thất designo màu nâu với các đường viền aluminium
-                trang trí độc đáo.
-              </p>
+            <div class="banner-title row">
+                <div class="title">
+                    <h4>{{this.product.name}}</h4>
+                    <p class="mt-4 m-0 text-secondary">Giá:</p>
+                    <p class="fw-bold"> {{ new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(this.product.price).replace("VND","")}} <i class="fa-solid fa-dong-sign"></i></p>
+                    <hr />
+                    <div>
+                        <span><img src="@/assets/svg/Icon-engine.svg" width="18" class="icon" /> {{this.product.details.volume}}</span>
+                        <span class="ms-5"><i class="fa-solid fa-gas-pump icon"></i> {{this.product.details.fuel}}</span>
+                        <p class="mt-2"><img src="@/assets/svg/Icon-gear.svg" width="18" class="icon" /> {{this.product.details.loaiSo}}</p>
+                    </div>
+                    <div class="mt-5">
+                        <button class="btn">
+                            <i class="fa-solid fa-heart"></i>
+                            Add to favorite
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="row mb-5">
-              <img src="@/assets/Images/Mercedes_MAYBACH/z223-3.webp" />
-              <p class="img-title">
-                Tuyên ngôn của thiết kế duy mỹ với các chi tiết mạ crôm sang
-                trọng.
-              </p>
+        </div>
+        <div class="container-fluid">
+            <h2 class="text-center">Thông số chi tiết</h2>
+            <div class="row ">
+                <div class="col-md-4">
+                    <img src="@/assets/Images/Mercedes/C200.jpg" class="w-100"/>
+                </div>
+                <div class="col-md-4 detail">
+                    <div>
+                        <p>Màu ngoại thất</p>
+                        <span>{{this.product.details.color.outSide}}</span>
+                    </div>
+                    <div>
+                        <p>Số xi lanh</p>
+                        <span>{{this.product.details.soXiLanh}}</span>
+                    </div>
+                    <div>
+                        <p>Chiều rộng</p>
+                        <span>{{this.product.details.chieuRong}} cm</span>
+                    </div>
+                    <div>
+                        <p>Khối lượng</p>
+                        <span>{{this.product.details.weight}} kg</span>
+                    </div>
+                    <div>
+                        <p>Tốc độ tối đa</p>
+                        <span>{{this.product.details.tocDo}} km/h</span>
+                    </div>
+                    <div>
+                        <p>Số chỗ ngồi</p>
+                        <span>{{this.product.details.soCho}}</span>
+                    </div>
+                </div>
+                <div class="col-md-4 detail">
+                    <div>
+                        <p>Dung tích công tác</p>
+                        <span>{{this.product.details.dungTich}} cm3</span>
+                    </div>
+                    <div>
+                        <p>Chiều dài</p>
+                        <span>{{this.product.details.chieuDai}} cm</span>
+                    </div>
+                    <div>
+                        <p>Chiều cao</p>
+                        <span>{{this.product.details.chieuCao}} cm</span>
+                    </div>
+                    <div>
+                        <p>Trọng lượng tối đa</p>
+                        <span>{{this.product.details.trongLuong}} kg</span>
+                    </div>
+                    <div>
+                        <p>Số cửa</p>
+                        <span>{{this.product.details.soCua}}</span>
+                    </div>
+                    <div>
+                        <p>Màu nội thất</p>
+                        <span>{{this.product.details.color.inSide}}</span>
+                    </div>
+                </div>
             </div>
-            <div class="row mb-5" style="width: 60%">
-              <img src="@/assets/Images/Mercedes_MAYBACH/z223-4.webp" />
-              <p class="img-title">
-                Trực quan tối ưu với hệ thống thông tin giải trí MBUX cho hàng
-                ghế sau.
-              </p>
-            </div>
-          </div>
+
         </div>
-      </div>
-      <div class="mb-5">
-        <div class="mb-5">
-          <p>Thiết kế</p>
-          <h5>Sang trọng thuần khiết</h5>
-          Vẻ lịch lãm truyền thống cùng tiện nghi hiện đại bậc nhất được thể
-          hiện ở mọi góc độ. Khả năng vận hành<br />
-          vượt trội của chiếc xe gây ấn tượng mạnh ngay từ cái nhìn đầu tiên.
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <img
-              src="@/assets/Images/Mercedes_MAYBACH/z223-5.webp"
-              style="width: 100%"
-            />
-            <p class="img-title">Vè thiết kế ngoại thất</p>
-          </div>
-          <div class="col-md-6">
-            <img
-              src="@/assets/Images/Mercedes_MAYBACH/z223-6.webp"
-              style="width: 100%"
-            />
-            <p class="img-title">Về thiết kế nội thất</p>
-          </div>
-        </div>
-      </div>
-      <div class="mb-5">
-        <div class="mb-5">
-          <p>Tiện nghi</p>
-          <h5>Đẳng cấp thương gia</h5>
-          Sự hoàn mỹ trong phong cách di chuyển thời thượng chính là chuẩn mực
-          của Mercedes-Maybach S-Class.<br />
-          Lịch lãm, sang trọng cùng trang bị tiện nghi đẳng cấp mang đến những
-          trải nghiệm lái độc đáo khó quên
-        </div>
-        <div class="row">
-          <div class="col-md-7">
-            <img
-              src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/s-class/mercedes-maybach-z223/explore/comfort-teaser/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide/image.MQ4.0.20210823072935.jpeg"
-              style="width: 100%"
-            />
-          </div>
-          <div class="col-md-5">
-            <p class="h4 ps-4">Tiện nghi nổi bật</p>
-            <ul style="font-weight: 600">
-              <li>
-                Hệ thống giải trí MBUX thế hệ mới với màn hình cảm ứng trung tâm
-                12,8-inch công nghệ OLED.
-              </li>
-              <li>
-                Chức năng điều khiển bằng cử chỉ MBUX Interior Assistant cho
-                hàng ghế trước và hàng ghế sau.
-              </li>
-              <li>
-                Gói trang bị Warmth Comfort với chức năng sưởi ấm cho tựa tay ở
-                cửa trước và sau, tựa tay trung tâm phía trước và vô lăng.
-              </li>
-              <li>
-                Chức năng sưởi ấm cổ và vai cho hàng ghế sauHệ thống lọc không
-                khí, bụi bẩn và vi khuẩn cao cấp ENERGIZING AIR CONTROL.
-              </li>
-              <li>Cửa sau đóng mở bằng điện.</li>
-              <li>
-                Kính an toàn nhiều lớp cao cấp với chức năng cách âm, cách nhiệt
-                & phản xạ tia hồng ngoại.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="mb-5">
-        <div class="mb-5">
-          <p>Thông số</p>
-          <h5>Công suất vượt trội cho trải nghiệm độc đáo.</h5>
-          Động cơ của Mercedes-Maybach S-Class: kiệt tác của tinh hoa công nghệ
-          Đức. <br />Đó là sự kết hợp hài hoà giữa khả năng di chuyển êm mượt và
-          hiệu suất lái vượt trội.
-        </div>
-        <div class="row">
-          <div class="col-md-5">
-            <p class="pb-3">Công suất cực đại</p>
-            <h2 class="pb-3">463 kW (630 HP)</h2>
-            <p class="pb-3">tại 5000 vòng/phút</p>
-            <hr />
-            <p class="pb-3">Động cơ</p>
-            <h2 class="pb-3">V12</h2>
-          </div>
-          <div class="col-md-7">
-            <img
-              src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/s-class/mercedes-maybach-z223/explore/specifications-teaser/_jcr_content/par/imagenumbercombinati/media/videoimageslide/image.MQ4.0.20210823072937.jpeg"
-              style="width: 100%"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+    </main>
 </template>

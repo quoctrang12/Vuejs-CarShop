@@ -13,6 +13,9 @@ class UserService {
         return (await this.api.post('/signup', data)).data;
     }
 
+    async getAll() {
+        return (await this.api.get('/')).data;
+    }
     async deleteAll() {
         return (await this.api.delete('/')).data;
     }

@@ -9,5 +9,11 @@ router
 router
   .route("/login")
   .post(users.login)
+router
+  .route("/")
+  .get(users.findAll)
+router
+  .route("/:id")
+  .get(users.delete)
 
 module.exports = router;

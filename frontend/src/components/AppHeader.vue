@@ -6,7 +6,7 @@
           class="text-black text-center pt-3 text-uppercase"
           style="font-weight: bold"
         >
-          <img src="@/assets/svg/Logo.svg" width="40" />
+          <img src="@/assets/svg/Logo.svg" width="50" />
         </h2>
       </router-link>
       <div class="row m-0 align-items-center">

@@ -6,11 +6,9 @@
   <hr />
   <div>
     <div class="ms-4">
+      
       <div class=" mb-3">
-        <router-link to="/admin"><i class="fas fa-tachometer-alt me-3"></i>Tổng Quan</router-link>
-      </div>
-      <div class=" mb-3">
-        <router-link to="/admin/product"><i class="fas fa-box me-3"></i>Quản lý Sản Phẩm</router-link>
+        <router-link to="/admin"><i class="fas fa-box me-3"></i>Quản lý Sản Phẩm</router-link>
       </div>
       <div class=" mb-3">
         <router-link to="/admin/order"><i class="fas fa-file me-3"></i>Quản lý Hóa Đơn</router-link>

@@ -85,7 +85,7 @@ class UserService {
 
   async delete(id) {
     const result = await this.User.findOneAndDelete({
-      _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+      _id: id,
     });
 
     return result.value;

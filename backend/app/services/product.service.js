@@ -6,11 +6,29 @@ class ProductService {
   }
   extractProductData(payload) {
     const product = {
+      type_id: payload.type_id,
       name: payload.name,
-      price: payload.price,
+      price: parseInt(payload.price) ,
       image: payload.image,
-      description: payload.description,
-      mount: payload.mount
+      details: {
+        loaiSo: payload['details[loaiSo]'],
+        fuel: payload['details[fuel]'],
+        color: {
+          inSide: payload['details[color][inSide]'],
+          outSide: payload['details[color][outSide]'],
+        },
+        volume: payload['details[volume]'],
+        soXiLanh: parseInt(payload['details[soXiLanh]']) ,
+        chieuRong: parseInt(payload['details[chieuRong]']) ,
+        weight: parseInt(payload['details[trongLuong]']) ,
+        tocDo: parseInt(payload['details[tocDo]']) ,
+        soCho: parseInt(payload['details[soCho]']) ,
+        dungTich: parseInt(payload['details[dungTich]']) ,
+        chieuDai: parseInt(payload['details[chieuDai]']) ,
+        chieuCao: parseInt(payload['details[chieuCao]']) ,
+        trongLuong: parseInt(payload['details[trongLuong]']) ,
+        soCua: parseInt(payload['details[soCua]']) ,
+      },
     };
 
     // remove undefined fields
@@ -20,13 +38,31 @@ class ProductService {
     return product;
   }
 
-  async create(payload) {
-    const product = this.extractProductData(payload);
-    const result = await this.Product.findOneAndUpdate(
-      product,
-      { $set: { favorite: product.favorite === true } },
-      { returnDocument: "after", upsert: true }
-      );
+  async create(file, payload) {
+    console.log(file);
+    const product = this.extractProductData({...payload,image:file.name});
+    console.log(product);
+    const fs = require('fs');
+        let folderPath = "D:\\PTUDW\\Project\\frontend\\src\\assets\\Images\\Mercedes";
+        try {
+            
+            if (!fs.existsSync(folderPath)) {
+                fs.mkdirSync(folderPath);
+            }
+            
+        } catch (err) {
+            console.error(err);
+        }
+        console.log(file.name);
+        file.mv(`${folderPath}/${file.name}`, function (err) {
+            if (err) {
+                console.log(err)
+                return res.status(500).send({ msg: "Error occured" });
+            }
+        });
+    const result = await this.Product.insertOne(
+      product
+    );
     return result.value;
   }
 
@@ -47,11 +83,23 @@ class ProductService {
     });
   }
 
-  async update(id, payload) {
+  async update(id,file, payload) {
     const filter = {
       _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
     };
-    const update = this.extractProductData(payload);
+    var update={};
+    if(!file){
+      update = this.extractProductData(payload);
+    }else{
+      update= this.extractProductData({...payload,image:file.name});
+        let folderPath = "D:\\PTUDW\\Project\\frontend\\src\\assets\\Images\\Mercedes";
+        file.mv(`${folderPath}/${file.name}`, function (err) {
+            if (err) {
+                console.log(err)
+                return res.status(500).send({ msg: "Error occured" });
+            }
+        });
+    }
     const result = await this.Product.findOneAndUpdate(
       filter,
       { $set: update },

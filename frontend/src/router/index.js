@@ -15,7 +15,7 @@ const routes = [
         component: () => import("@/views/products/ProductPage.vue"),
       },
       {
-        path: "detail",
+        path: "product/:id",
         // name: "orderManager",
         component: () => import("@/views/products/ProductDetail.vue"),
       },
@@ -28,6 +28,18 @@ const routes = [
         path: "about",
         name: "About",
         component: () => import("@/views/about/AboutPage.vue"),
+      },
+      {
+        path: "/detail/album/MercedesMaybach",
+        component: () => import("@/views/about/MercedesMaybach.vue"),
+      },
+      {
+        path: "/detail/album/MercedesGClass",
+        component: () => import("@/views/about/MercedesGClass.vue"),
+      },
+      {
+        path: "/detail/album/MercedesAMG",
+        component: () => import("@/views/about/MercedesAMG.vue"),
       },
       {
         path: "login",
@@ -49,13 +61,9 @@ const routes = [
       {
         path: "",
         // name: "adminHome",
-        component: () => import("@/views/admin/HomePage.vue"),
-      },
-      {
-        path: "product",
-        // name: "productManager",
         component: () => import("@/views/admin/ProductManager.vue"),
       },
+      
       {
         path: "customer",
         // name: "customerManager",

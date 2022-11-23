@@ -4,8 +4,11 @@ const ApiError = require("../api-error");
 
 exports.create = async (req, res, next) => {
   try {
+    if (!req.files) {
+      return res.status(500).send({ msg: "file is not found" });
+    }
     const contactService = new ProductService(MongoDB.client);
-    const document = await contactService.create(req.body);
+    const document = await contactService.create(req.files.file, req.body);
     return res.send(document);
   } catch (error) {
     return next(
@@ -46,8 +49,15 @@ exports.update = async (req, res, next) => {
   }
 
   try {
+    const document = {};
     const contactService = new ProductService(MongoDB.client);
-    const document = await contactService.update(req.params.id, req.body);
+    if(!req.files){
+       document = await contactService.update(req.params.id,null, req.body);
+      
+    }else{
+       document = await contactService.update(req.params.id,req.files.file, req.body);
+
+    }
     if (!document) {
       return next(new ApiError(404, "Contact not found"));
     }
@@ -85,5 +95,3 @@ exports.deleteAll = async (_req, res, next) => {
     );
   }
 };
-
-

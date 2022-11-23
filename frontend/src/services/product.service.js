@@ -10,7 +10,11 @@ class ProductService {
     }
 
     async create(data) {
-        return (await this.api.post('/', data)).data;
+        return (await this.api.post('/', data,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })).data;
     }
 
     async deleteAll() {
@@ -22,7 +26,11 @@ class ProductService {
     }
 
     async update(id, data) {
-        return (await this.api.put(`/${id}`, data)).data;
+        return (await this.api.put(`/${id}`, data,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })).data;
     }
 
     async delete(id) {
