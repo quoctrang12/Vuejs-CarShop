@@ -37,8 +37,6 @@
                 v-model="this.account.password"
                 required
               />
-              <i class="fas fa-eye eye_open"></i>
-              <i class="fas fa-eye-slash eye_close"></i>
             </div>
             {{ this.error }}
             <div class="text-end mb-3">

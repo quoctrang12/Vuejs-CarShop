@@ -7,7 +7,7 @@
           <h5>Digital World Premiere</h5>
           <h4>EQE SUV</h4>
           <p class="bg-white py-2 fw-bold">
-            <router-link class="text-decoration-none text-dark" to="/about-detail"
+            <router-link class="text-decoration-none text-dark" to="/detail/album/MercedesMaybach"
               >SEE MORE</router-link
             >
           </p>

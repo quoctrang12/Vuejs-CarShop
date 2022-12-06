@@ -40,8 +40,8 @@ export default {
 }
 </script>
 <template>
-  <div class="container" style="min-height: 100vh">
-    <div class="row san-pham mt-4">
+  <div class="container ps-0" style="min-height: 100vh">
+    <div class="row san-pham mt-4 ms-0">
       <div class="thong-ke text-center mb-3">
         <h4 class="fw-bold">DANH SÁCH YÊU CẦU</h4>
       </div>
